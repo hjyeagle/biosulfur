@@ -7,192 +7,195 @@
     <style>
         :root {
             --primary-color: #2c3e50;
-            --secondary-color: #34495e;
             --accent-color: #27ae60;
-            --bg-color: #f4f7f6;
-            --text-color: #333;
+            --bg-color: #f8f9fa;
         }
         body {
             margin: 0;
-            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
-            display: flex;
-            height: 100vh;
+            font-family: 'Pretendard', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
+            color: #333;
+            line-height: 1.6;
         }
-        /* 사이드바 영역 */
-        .sidebar {
-            width: 280px;
+        header {
             background-color: var(--primary-color);
             color: white;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-        .sidebar-header {
-            padding: 20px;
-            background-color: #1a252f;
+            padding: 2rem 1rem;
             text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .menu-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .menu-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--secondary-color);
-            cursor: pointer;
-            transition: background 0.3s;
+        .category-section {
+            margin-bottom: 3rem;
         }
-        .menu-item:hover, .menu-item.active {
-            background-color: var(--accent-color);
-        }
-        /* 메인 콘텐츠 영역 */
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            overflow-y: auto;
-        }
-        .content-header {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .content-title {
-            margin: 0;
-            font-size: 1.8rem;
+        .category-title {
+            font-size: 1.5rem;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 1.5rem;
             color: var(--primary-color);
+            background: #fff;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
         }
-        .file-viewer {
-            flex: 1;
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .item-card {
             background: white;
+            padding: 15px 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e1e4e8;
+            transition: all 0.2s;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+        }
+        .item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .item-number {
+            background: var(--accent-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
-            text-align: center;
-        }
-        .file-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #e74c3c;
-        }
-        .file-name {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            word-break: break-all;
-        }
-        .btn-download {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
+            font-size: 0.9rem;
             font-weight: bold;
-            transition: background 0.3s;
+            flex-shrink: 0;
         }
-        .btn-download:hover {
-            background-color: #219653;
+        .item-name {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .download-icon {
+            color: #95a5a6;
+            font-size: 1.2rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            바이오황 자료실
-        </div>
-        <ul class="menu-list" id="menuList">
-            </ul>
-    </aside>
+<header>
+    <h1>농업회사법인 수성(주) 바이오황 자료실</h1>
+    <p>Bio-Sulfur Integration Data Center</p>
+</header>
 
-    <main class="content-area">
-        <div class="content-header">
-            <h1 class="content-title" id="contentTitle">메뉴를 선택해 주세요</h1>
-        </div>
-        <div class="file-viewer" id="fileViewer" style="display: none;">
-            <div class="file-icon">📄</div>
-            <div class="file-name" id="fileName">파일명.pdf</div>
-            <a href="#" class="btn-download" id="downloadBtn" target="_blank">파일 열기 / 다운로드</a>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #7f8c8d;">
-                * 파일이 브라우저에서 바로 열리지 않는 경우 다운로드됩니다. (웹 호스팅 서버 내 동일 폴더에 파일이 위치해야 합니다.)
-            </p>
-        </div>
-    </main>
+<div class="container" id="content-display">
+    </div>
 
-    <script>
-        // ==========================================
-        // 💡 [수정 안내] 데이터 추가/수정/삭제 영역
-        // ==========================================
-        // 새로운 자료를 추가하려면 아래 배열(menuData)에 항목을 추가하세요.
-        // name: 웹페이지 좌측에 보일 메뉴 이름
-        // file: 실제 서버에 올라가 있는 파일의 정확한 이름 (확장자 포함)
+<footer>
+    &copy; 2026 농업회사법인 수성(주). All Rights Reserved.
+</footer>
+
+<script>
+    /**
+     * 자료 데이터 설정 (수정/추가/삭제 시 이 배열만 편집하세요)
+     * - sectionTitle: 카테고리 제목
+     * - items: [ { name: "표시될 이름", file: "GitHub에 올린 파일명" }, ... ]
+     */
+    const libraryData = [
+        {
+            sectionTitle: "1. 한국어 자료 (축산/수산/농작물)",
+            items: [
+                { name: "한우", file: "Bio-Sulfur_한우_Innovation.pdf" },
+                { name: "돼지", file: "K-Premium_Bio-Sulfur_돼지.pdf" },
+                { name: "육계", file: "바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 육계 산업화 전략.pdf" },
+                { name: "달걀", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
+                { name: "수산물", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" },
+                { name: "기타 농작물 (벼, 과일 등)", file: "배추 재배 바이오황 활용 기술 제안_0317_2.pdf" },
+                { name: "인증서 및 시험성적서", file: "수성바이오황설명_바이오황 사료_비료_인증서_각종시험성적서_태스트결과모음_260212.pdf" },
+                { name: "기타 참고자료", file: "일반_바이오황비료_제안서260326.pdf" }
+            ]
+        },
+        {
+            sectionTitle: "2. 농협 및 지자체 관련 자료",
+            items: [
+                { name: "농협중앙회", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
+                { name: "거진농협", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
+                { name: "고성축협", file: "Bio-Sulfur_한우_Innovation.pdf" },
+                { name: "수협", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" }
+                // 필요시 PDF 목록에 맞춰 계속 추가 가능
+            ]
+        },
+        {
+            sectionTitle: "3. 일본어 자료 (Global Strategy)",
+            items: [
+                { name: "달걀 사업제안서", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
+                { name: "돼지 제안서 (국제실증)", file: "국제적 실증에 기초한 프리미엄급 돼지 제안서_260324.pdf" },
+                { name: "한우 제안서 (국제실증)", file: "국제적 실증에 기초한 프리미엄급 한우 제안서_0316.pdf" },
+                { name: "일본 농업시장 진입 전략", file: "일본진출농업.pdf" }
+            ]
+        }
+    ];
+
+    const displayContainer = document.getElementById('content-display');
+
+    function renderLibrary() {
+        displayContainer.innerHTML = ''; // 초기화
         
-        const menuData = [
-            { name: "1번 메뉴", file: "일본진출농업.pdf" },
-            { name: "2번 메뉴", file: "일반_바이오황비료_제안서260326.pdf" },
-            { name: "3번 메뉴", file: "수성바이오황설명_바이오황 사료_비료_인증서_각종시험성적서_태스트결과모음_260212.pdf" },
-            { name: "4번 메뉴", file: "국제적 실증에 기초한 프리미엄급 한우 제안서_0316.pdf" },
-            { name: "5번 메뉴", file: "바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 육계 산업화 전략.pdf" },
-            { name: "6번 메뉴", file: "국제적 실증에 기초한 프리미엄급 돼지 제안서_260324.pdf" },
-            { name: "7번 메뉴", file: "해삼논문영문.pdf" },
-            { name: "8번 메뉴", file: "일본 농축산업 시장 진입을 위한 JA 공략 및 고부가가치 프리미엄 브랜드 구축 전략 보고서.pdf" },
-            { name: "9번 메뉴", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
-            { name: "10번 메뉴", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
-            { name: "11번 메뉴", file: "부경대 넙치 치어 실험자료(영문).pdf" },
-            { name: "12번 메뉴", file: "제품 안전성(경구독성) 시험 결과.pdf" },
-            { name: "13번 메뉴", file: "Bio-Sulfur_한우_Innovation.pdf" },
-            { name: "14번 메뉴", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" },
-            { name: "15번 메뉴", file: "유황_자료_통합_보고서_1209_1[1].pdf" }
-        ];
-
-        // ==========================================
-        // 이하 로직 (수정 불필요)
-        // ==========================================
-        const menuListElement = document.getElementById('menuList');
-        const contentTitle = document.getElementById('contentTitle');
-        const fileViewer = document.getElementById('fileViewer');
-        const fileName = document.getElementById('fileName');
-        const downloadBtn = document.getElementById('downloadBtn');
-
-        // 메뉴 렌더링
-        function renderMenu() {
-            menuData.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'menu-item';
-                li.textContent = item.name;
-                li.onclick = () => selectMenu(index, li);
-                menuListElement.appendChild(li);
+        libraryData.forEach((section) => {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'category-section';
+            
+            const title = document.createElement('h2');
+            title.className = 'category-title';
+            title.textContent = section.sectionTitle;
+            sectionDiv.appendChild(title);
+            
+            const grid = document.createElement('div');
+            grid.className = 'item-grid';
+            
+            section.items.forEach((item, index) => {
+                const card = document.createElement('a');
+                card.className = 'item-card';
+                // GitHub Pages 경로: index.html과 같은 위치에 파일이 있다고 가정
+                card.href = `./${encodeURIComponent(item.file)}`;
+                card.target = '_blank'; // 새 창에서 열기
+                
+                card.innerHTML = `
+                    <div class="item-info">
+                        <div class="item-number">${index + 1}</div>
+                        <div class="item-name">${item.name}</div>
+                    </div>
+                    <div class="download-icon">📥</div>
+                `;
+                grid.appendChild(card);
             });
-        }
-
-        // 메뉴 선택 시 동작
-        function selectMenu(index, element) {
-            // 활성화 상태 변경
-            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-
-            // 콘텐츠 업데이트
-            const selectedItem = menuData[index];
-            contentTitle.textContent = selectedItem.name;
-            fileName.textContent = selectedItem.file;
             
-            // 링크 설정 (현재 HTML 파일과 같은 경로에 PDF 파일들이 있다고 가정)
-            downloadBtn.href = "./" + encodeURIComponent(selectedItem.file);
-            
-            fileViewer.style.display = 'flex';
-        }
+            sectionDiv.appendChild(grid);
+            displayContainer.appendChild(sectionDiv);
+        });
+    }
 
-        // 초기화 실행
-        renderMenu();
-    </script>
+    renderLibrary();
+</script>
+
 </body>
 </html>
