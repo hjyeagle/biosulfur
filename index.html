@@ -22,7 +22,6 @@
             color: white;
             padding: 2rem 1rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .container {
             max-width: 1100px;
@@ -30,29 +29,27 @@
             padding: 0 1rem;
         }
         .category-section {
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
         .category-title {
-            font-size: 1.5rem;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
+            font-size: 1.4rem;
+            border-left: 6px solid var(--accent-color);
+            padding: 12px 18px;
             margin-bottom: 1.5rem;
             color: var(--primary-color);
             background: #fff;
-            padding-top: 10px;
-            padding-bottom: 10px;
             border-radius: 0 5px 5px 0;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
         }
         .item-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 15px;
         }
         .item-card {
             background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 10px;
             border: 1px solid #e1e4e8;
             transition: all 0.2s;
             display: flex;
@@ -62,8 +59,8 @@
             color: inherit;
         }
         .item-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             border-color: var(--accent-color);
         }
         .item-info {
@@ -74,29 +71,30 @@
         .item-number {
             background: var(--accent-color);
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             flex-shrink: 0;
         }
         .item-name {
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            word-break: keep-all;
         }
         .download-icon {
-            color: #95a5a6;
-            font-size: 1.2rem;
+            color: #bdc3c7;
+            font-size: 1.1rem;
         }
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #7f8c8d;
-            font-size: 0.9rem;
+            padding: 3rem;
+            color: #95a5a6;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -104,21 +102,21 @@
 
 <header>
     <h1>농업회사법인 수성(주) 바이오황 자료실</h1>
-    <p>Bio-Sulfur Integration Data Center</p>
+    <p>Bio-Sulfur Global Data Archive</p>
 </header>
 
 <div class="container" id="content-display">
     </div>
 
 <footer>
-    &copy; 2026 농업회사법인 수성(주). All Rights Reserved.
+    &copy; 2026 농업회사법인 수성(주). All Rights Reserved.<br>
+    GitHub: <a href="https://github.com/hjyeagle/biosulfur" style="color:#95a5a6;">github.com/hjyeagle/biosulfur</a>
 </footer>
 
 <script>
     /**
-     * 자료 데이터 설정 (수정/추가/삭제 시 이 배열만 편집하세요)
-     * - sectionTitle: 카테고리 제목
-     * - items: [ { name: "표시될 이름", file: "GitHub에 올린 파일명" }, ... ]
+     * [관리자용 데이터 설정]
+     * file 항목에는 실제 GitHub에 올린 파일명을 확장자 포함하여 정확히 적어주세요.
      */
     const libraryData = [
         {
@@ -127,30 +125,47 @@
                 { name: "한우", file: "Bio-Sulfur_한우_Innovation.pdf" },
                 { name: "돼지", file: "K-Premium_Bio-Sulfur_돼지.pdf" },
                 { name: "육계", file: "바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 육계 산업화 전략.pdf" },
-                { name: "달걀", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
+                { name: "달걀", file: "Bio-Sulfur_Premium_달걀_Strategy.pdf" },
                 { name: "수산물", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" },
-                { name: "기타 농작물 (벼, 과일 등)", file: "배추 재배 바이오황 활용 기술 제안_0317_2.pdf" },
-                { name: "인증서 및 시험성적서", file: "수성바이오황설명_바이오황 사료_비료_인증서_각종시험성적서_태스트결과모음_260212.pdf" },
-                { name: "기타 참고자료", file: "일반_바이오황비료_제안서260326.pdf" }
+                { name: "기타 농작물 (벼, 과일, 채소 등)", file: "일반_바이오황비료_제안서260326.pdf" },
+                { name: "인증서와 각종 시험성적서", file: "수성바이오황설명_바이오황 사료_비료_인증서_각종시험성적서_태스트결과모음_260212.pdf" },
+                { name: "기타 참고자료", file: "유황_자료_통합_보고서_1209_1[1].pdf" }
             ]
         },
         {
-            sectionTitle: "2. 농협 및 지자체 관련 자료",
+            sectionTitle: "2. 농협 및 지자체, 기업 관련 제출자료",
             items: [
                 { name: "농협중앙회", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
                 { name: "거진농협", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
                 { name: "고성축협", file: "Bio-Sulfur_한우_Innovation.pdf" },
-                { name: "수협", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" }
-                // 필요시 PDF 목록에 맞춰 계속 추가 가능
+                { name: "부경양돈농협", file: "K-Premium_Bio-Sulfur_돼지.pdf" },
+                { name: "서경양돈농협", file: "K-Premium_Bio-Sulfur_돼지.pdf" },
+                { name: "조인달걀", file: "Bio-Sulfur_Premium_달걀_Strategy.pdf" },
+                { name: "한국양계농협", file: "Bio-Sulfur_Premium_달걀_Strategy.pdf" },
+                { name: "농협에코아그로", file: "일반_바이오황비료_제안서260326.pdf" },
+                { name: "농협대학", file: "일반_바이오황비료_제안서260326.pdf" },
+                { name: "농협유통", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
+                { name: "고성군청", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
+                { name: "수협", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" },
+                { name: "아산시", file: "Bio-Sulfur_한우_Innovation.pdf" },
+                { name: "여주시", file: "일반_바이오황비료_제안서260326.pdf" }
             ]
         },
         {
-            sectionTitle: "3. 일본어 자료 (Global Strategy)",
+            sectionTitle: "3. 바이오황 관련 일본어 자료 (Global Strategy)",
             items: [
-                { name: "달걀 사업제안서", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
-                { name: "돼지 제안서 (국제실증)", file: "국제적 실증에 기초한 프리미엄급 돼지 제안서_260324.pdf" },
-                { name: "한우 제안서 (국제실증)", file: "국제적 실증에 기초한 프리미엄급 한우 제안서_0316.pdf" },
-                { name: "일본 농업시장 진입 전략", file: "일본진출농업.pdf" }
+                { name: "글로벌 프리미엄 달걀 사업제안서", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
+                { name: "국제실증 기초 프리미엄 돼지 제안서", file: "국제적 실증에 기초한 프리미엄급 돼지 제안서_260324.pdf" },
+                { name: "국제실증 기초 프리미엄 한우 제안서", file: "국제적 실증에 기초한 프리미엄급 한우 제안서_0316.pdf" },
+                { name: "일본 농업시장 진입 전략 보고서", file: "일본진출농업.pdf" },
+                { name: "일본어 자료 5 (추가예정)", file: "#" },
+                { name: "일본어 자료 6 (추가예정)", file: "#" },
+                { name: "일본어 자료 7 (추가예정)", file: "#" },
+                { name: "일본어 자료 8 (추가예정)", file: "#" },
+                { name: "일본어 자료 9 (추가예정)", file: "#" },
+                { name: "일본어 자료 10 (추가예정)", file: "#" },
+                { name: "일본어 자료 11 (추가예정)", file: "#" },
+                { name: "일본어 자료 12 (추가예정)", file: "#" }
             ]
         }
     ];
@@ -158,7 +173,7 @@
     const displayContainer = document.getElementById('content-display');
 
     function renderLibrary() {
-        displayContainer.innerHTML = ''; // 초기화
+        displayContainer.innerHTML = ''; 
         
         libraryData.forEach((section) => {
             const sectionDiv = document.createElement('div');
@@ -175,16 +190,20 @@
             section.items.forEach((item, index) => {
                 const card = document.createElement('a');
                 card.className = 'item-card';
-                // GitHub Pages 경로: index.html과 같은 위치에 파일이 있다고 가정
-                card.href = `./${encodeURIComponent(item.file)}`;
-                card.target = '_blank'; // 새 창에서 열기
+                // 파일명이 '#'인 경우 알림창 띄우기, 아니면 새창 열기
+                if(item.file === "#") {
+                    card.href = "javascript:alert('자료 준비 중입니다.');";
+                } else {
+                    card.href = `./${encodeURIComponent(item.file)}`;
+                    card.target = '_blank';
+                }
                 
                 card.innerHTML = `
                     <div class="item-info">
                         <div class="item-number">${index + 1}</div>
                         <div class="item-name">${item.name}</div>
                     </div>
-                    <div class="download-icon">📥</div>
+                    <div class="download-icon">📄</div>
                 `;
                 grid.appendChild(card);
             });
