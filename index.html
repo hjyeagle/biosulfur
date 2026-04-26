@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>농업회사법인 수성(주) - 바이오황 통합 자료실</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #27ae60;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+        }
+        body {
+            margin: 0;
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        /* 사이드바 영역 */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding: 20px;
+            background-color: #1a252f;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--secondary-color);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .menu-item:hover, .menu-item.active {
+            background-color: var(--accent-color);
+        }
+        /* 메인 콘텐츠 영역 */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        .content-header {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .content-title {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        .file-viewer {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+        }
+        .file-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        .file-name {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            word-break: break-all;
+        }
+        .btn-download {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-download:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            바이오황 자료실
+        </div>
+        <ul class="menu-list" id="menuList">
+            </ul>
+    </aside>
+
+    <main class="content-area">
+        <div class="content-header">
+            <h1 class="content-title" id="contentTitle">메뉴를 선택해 주세요</h1>
+        </div>
+        <div class="file-viewer" id="fileViewer" style="display: none;">
+            <div class="file-icon">📄</div>
+            <div class="file-name" id="fileName">파일명.pdf</div>
+            <a href="#" class="btn-download" id="downloadBtn" target="_blank">파일 열기 / 다운로드</a>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #7f8c8d;">
+                * 파일이 브라우저에서 바로 열리지 않는 경우 다운로드됩니다. (웹 호스팅 서버 내 동일 폴더에 파일이 위치해야 합니다.)
+            </p>
+        </div>
+    </main>
+
+    <script>
+        // ==========================================
+        // 💡 [수정 안내] 데이터 추가/수정/삭제 영역
+        // ==========================================
+        // 새로운 자료를 추가하려면 아래 배열(menuData)에 항목을 추가하세요.
+        // name: 웹페이지 좌측에 보일 메뉴 이름
+        // file: 실제 서버에 올라가 있는 파일의 정확한 이름 (확장자 포함)
+        
+        const menuData = [
+            { name: "1번 메뉴", file: "일본진출농업.pdf" },
+            { name: "2번 메뉴", file: "일반_바이오황비료_제안서260326.pdf" },
+            { name: "3번 메뉴", file: "수성바이오황설명_바이오황 사료_비료_인증서_각종시험성적서_태스트결과모음_260212.pdf" },
+            { name: "4번 메뉴", file: "국제적 실증에 기초한 프리미엄급 한우 제안서_0316.pdf" },
+            { name: "5번 메뉴", file: "바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 육계 산업화 전략.pdf" },
+            { name: "6번 메뉴", file: "국제적 실증에 기초한 프리미엄급 돼지 제안서_260324.pdf" },
+            { name: "7번 메뉴", file: "해삼논문영문.pdf" },
+            { name: "8번 메뉴", file: "일본 농축산업 시장 진입을 위한 JA 공략 및 고부가가치 프리미엄 브랜드 구축 전략 보고서.pdf" },
+            { name: "9번 메뉴", file: "요약-법제유황 기반 프리미엄 농축산물 혁신 공동사업 제안.pdf" },
+            { name: "10번 메뉴", file: "13_바이오황(Bio-Sulfur) 기술 기반 글로벌 프리미엄 달걀 사업제안서.pdf" },
+            { name: "11번 메뉴", file: "부경대 넙치 치어 실험자료(영문).pdf" },
+            { name: "12번 메뉴", file: "제품 안전성(경구독성) 시험 결과.pdf" },
+            { name: "13번 메뉴", file: "Bio-Sulfur_한우_Innovation.pdf" },
+            { name: "14번 메뉴", file: "수협 프리미엄 수산 혁신 제안서_수정본_1113_최종_0210_바이오황.pdf" },
+            { name: "15번 메뉴", file: "유황_자료_통합_보고서_1209_1[1].pdf" }
+        ];
+
+        // ==========================================
+        // 이하 로직 (수정 불필요)
+        // ==========================================
+        const menuListElement = document.getElementById('menuList');
+        const contentTitle = document.getElementById('contentTitle');
+        const fileViewer = document.getElementById('fileViewer');
+        const fileName = document.getElementById('fileName');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // 메뉴 렌더링
+        function renderMenu() {
+            menuData.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.className = 'menu-item';
+                li.textContent = item.name;
+                li.onclick = () => selectMenu(index, li);
+                menuListElement.appendChild(li);
+            });
+        }
+
+        // 메뉴 선택 시 동작
+        function selectMenu(index, element) {
+            // 활성화 상태 변경
+            document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            // 콘텐츠 업데이트
+            const selectedItem = menuData[index];
+            contentTitle.textContent = selectedItem.name;
+            fileName.textContent = selectedItem.file;
+            
+            // 링크 설정 (현재 HTML 파일과 같은 경로에 PDF 파일들이 있다고 가정)
+            downloadBtn.href = "./" + encodeURIComponent(selectedItem.file);
+            
+            fileViewer.style.display = 'flex';
+        }
+
+        // 초기화 실행
+        renderMenu();
+    </script>
+</body>
+</html>
